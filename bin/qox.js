@@ -32,7 +32,7 @@ if (!semver.satisfies(process.version, '>=6')) {
   process.exit(1);
 }
 
-const commands = ['init', 'build', 'dev', 'lint', 'build', 'publish'];
+const commands = ['init', 'dev', 'lint', 'build', 'publish'];
 
 cli
   .version(pkg.version)
@@ -62,8 +62,8 @@ cli
   .action(CMD_PUBLISH)
 
 cli
-  .command('lint')
-  .description('lint code'.green)
+  .command('lint <path> [param]')
+  .description('lint code style'. green)
   .action(CMD_LINT);
 
 // help
