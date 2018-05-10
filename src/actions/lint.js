@@ -4,7 +4,7 @@ const utils = require('../lib/utils');
 
 const { printCommandLog, msg } = utils;
 
-module.exports = function(path, param, options) {
+module.exports = function(path, options) {
   const QOX_JSON_PATH = `${process.cwd()}/qox.json`;
 
   if (fs.existsSync(QOX_JSON_PATH)) {
@@ -37,7 +37,6 @@ module.exports = function(path, param, options) {
 
     // fix code style
     if (options.fix) {
-
       eslint.CLIEngine.outputFixes(report);
     }
   } else {

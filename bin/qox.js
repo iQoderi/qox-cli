@@ -62,7 +62,7 @@ cli
   .action(CMD_PUBLISH)
 
 cli
-  .command('lint <path> [param]')
+  .command('lint <path>')
   .description('lint code style'. green)
   .option('--fix', 'auto fix code style')
   .action(CMD_LINT);
