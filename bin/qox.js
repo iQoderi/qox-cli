@@ -11,7 +11,7 @@ const CMD_INIT = require('../src/actions/init');
 const CMD_DEV = require('../src/actions/dev');
 const CMD_BUILD = require('../src/actions/build');
 const CMD_PUBLISH = require('../src/actions/publish');
-const CMD_LINT = require('../src/actions/init');
+const CMD_LINT = require('../src/actions/lint');
 
 // Update notifications
 updateNotifier({pkg}).notify();
@@ -35,7 +35,7 @@ if (!semver.satisfies(process.version, '>=6')) {
 const commands = ['init', 'dev', 'lint', 'build', 'publish'];
 
 cli
-  .version(pkg.version)
+  .version(pkg.version, '-v, --version')
   .usage('[command]'.green)
   .description(pkg.description.green);
 
