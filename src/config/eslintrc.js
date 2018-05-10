@@ -1,7 +1,7 @@
 
 /* eslint quotes: off */
 
-module.exports = {
+const rax = {
   "root": true,
   "parser": "babel-eslint",
   "env": {
@@ -29,20 +29,20 @@ module.exports = {
       "experimentalObjectRestSpread": true
     }
   },
-  "globals": {
-    "__weex_data__": true,
-    "__weex_options__": true,
-    "__weex_downgrade__": true,
-    "__weex_define__": true,
-    "__weex_require__": true,
-    "WXEnvironment": true,
-    "webkitRequestAnimationFrame": true,
-    "webkitCancelAnimationFrame": true,
-    "jasmine": true
-  },
+  "globals": [
+    '__weex_data__',
+    '__weex_options__',
+    '__weex_require__',
+    '__weex_define__',
+    'process',
+    'require',
+    'console',
+    'module'
+  ],
   "rules": {
     // ES6
     "prefer-const": "off",
+    'global-require': 'off',
     "no-const-assign": "error",
     "no-class-assign": "error",
     "no-dupe-class-members": "error",
@@ -97,6 +97,7 @@ module.exports = {
     "camelcase": ["off", {
       "properties": "always"
     }],
+    'no-restricted-globals': 'error',
     "quotes": ["error", "single", "avoid-escape"],
     "brace-style": ["error", "1tbs", {
       "allowSingleLine": false
@@ -199,4 +200,8 @@ module.exports = {
       ]
     }]
   }
+};
+
+module.exports = {
+  rax
 };

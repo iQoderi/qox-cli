@@ -64,6 +64,7 @@ cli
 cli
   .command('lint <path> [param]')
   .description('lint code style'. green)
+  .option('--fix', 'auto fix code style')
   .action(CMD_LINT);
 
 // help
