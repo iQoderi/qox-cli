@@ -6,7 +6,7 @@ const opn = require('opn');
 const { exec } = require('child_process');
 const util = require('../lib/utils');
 
-const { preInstall, printCommandLog } = util;
+const { preInstall, printCommandLog, probe } = util;
 const { log, error } = util.msg;
 
 module.exports = function() {
@@ -29,19 +29,26 @@ module.exports = function() {
 
     const protocol = process.env.HTTPS === 'true' ? 'https:' : 'http:';
     const hostname = process.env.HOST || address.ip();
-    const port = 8080;
+    let port = 8080;
 
-    const serverConf = {
-      protocol,
-      hostname,
-      port
-    };
+    probe(port, function(inVaild) {
+     
+      if (inVaild) {
+        console.log(`检测到端口(${port})已被占用，自动启用端口 ${port + 1}`.red);
+        port = port + 1;
+      }
 
-    startDev(serverConf, function() {
-      const serverUrl = `${protocol}//${hostname}:${port}/`;
-      opn(serverUrl);     
+      const serverConf = {
+        protocol,
+        hostname,
+        port
+      };
+  
+      startDev(serverConf, function() {
+        const serverUrl = `${protocol}//${hostname}:${port}/`;
+        opn(serverUrl);     
+      });
     });
-
   } else {
     error(`Can not find ${'qox.json'.bold} in current directory`.red);
   }

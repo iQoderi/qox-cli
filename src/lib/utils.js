@@ -1,4 +1,5 @@
 const fs = require('fs');
+const net = require('net');
 const path = require('path');
 const colors = require('colors');
 const { execSync } = require('child_process');
@@ -61,7 +62,7 @@ const probe = function(port, callback) {
 
       if (!calledOnce) {
           calledOnce = true
-          callback(true,port)
+          callback(true, port)
       }
   })
 

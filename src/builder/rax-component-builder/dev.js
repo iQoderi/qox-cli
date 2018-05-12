@@ -28,8 +28,6 @@ function start(conf = {}, callback) {
 
   const server = new WebpackDevServer(compiler,  newWebpackDevServerConfig);
 
-  console.log(webpackDevServerConfig);
-
   server.listen(port, hostname, err => {
     if (err) {
       console.log(colors.red('[ERR]: Failed to webpack dev server'));
