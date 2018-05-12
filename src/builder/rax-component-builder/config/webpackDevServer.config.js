@@ -2,7 +2,7 @@
 
 const config = require('./webpack.config.prod');
 const pathConfig = require('./path.config');
-const envConfig = require('./env.config');
+// const envConfig = require('./env.config');
 
 module.exports = {
   compress: true,
@@ -15,8 +15,8 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/,
   },
-  https: envConfig.protocol === 'https:',
-  host: envConfig.host,
-  public: envConfig.host,
+  // https: envConfig.protocol === 'https:',
+  // host: envConfig.host,
+  // public: envConfig.host,
   overlay: false,
 };

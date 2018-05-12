@@ -1,6 +1,6 @@
 'use strict';
 /* eslint no-console: 0 */
-const opn = require('opn');
+const _ = require('lodash');
 
 process.env.NODE_ENV = 'development';
 
@@ -14,12 +14,21 @@ const WebpackDevServer = require('webpack-dev-server');
 const createWebpackCompiler = require('./utils/createWebpackCompiler');
 const webpackConfigDev = require('./config/webpack.config.dev');
 const webpackDevServerConfig = require('./config/webpackDevServer.config');
-const envConfig = require('./config/env.config');
 
-function start(port, hostname) {
+function start(conf = {}, callback) {
+  const { protocol, port, hostname } = conf;
   const compiler = createWebpackCompiler(webpackConfigDev);
 
-  const server = new WebpackDevServer(compiler, webpackDevServerConfig);
+  // modify webpackDevServerConfig
+  const newWebpackDevServerConfig = _.assign({}, webpackDevServerConfig, {
+    https: protocol === 'https:',
+    host: hostname,
+    public: hostname,
+  });
+
+  const server = new WebpackDevServer(compiler,  newWebpackDevServerConfig);
+
+  console.log(webpackDevServerConfig);
 
   server.listen(port, hostname, err => {
     if (err) {
@@ -28,10 +37,10 @@ function start(port, hostname) {
       process.exit(1);
     }
 
-    const serverUrl = `${envConfig.protocol}//${envConfig.host}:${envConfig.port}/`;
-
-    opn(serverUrl, { app: 'google chrome' });
+    const serverUrl = `${protocol}//${hostname}:${port}/`;
     
+    callback && callback();
+
     console.log('');
     console.log('');
     console.log(colors.green('Starting the development server at:'));
@@ -40,4 +49,5 @@ function start(port, hostname) {
   });
 }
 
-start(envConfig.port, envConfig.host);
+module.exports = start;
+
