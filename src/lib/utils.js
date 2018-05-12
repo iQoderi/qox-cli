@@ -37,11 +37,54 @@ const preInstall = function(yarn) {
   execSync(yarn ? 'yarn install' : 'npm install');
 };
 
+// 检测port是否被占用
+// @see https://segmentfault.com/q/1010000006954465
+const probe = function(port, callback) {
+  var server = net.createServer().listen(port)
+
+  var calledOnce = false
+
+  var timeoutRef = setTimeout(function () {
+      calledOnce = true
+      callback(false,port)
+  }, 2000)
+
+  timeoutRef.unref()
+
+  var connected = false
+
+  server.on('listening', function() {
+      clearTimeout(timeoutRef)
+
+      if (server)
+          server.close()
+
+      if (!calledOnce) {
+          calledOnce = true
+          callback(true,port)
+      }
+  })
+
+  server.on('error', function(err) {
+      clearTimeout(timeoutRef)
+
+      var result = true
+      if (err.code === 'EADDRINUSE')
+          result = false
+
+      if (!calledOnce) {
+          calledOnce = true
+          callback(result, port)
+      }
+  })
+}
+
 module.exports = {
   currentDir,
   existDir,
   preInstall,
   printCommandLog,
+  probe,
   msg: {
     log,
     warn,

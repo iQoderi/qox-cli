@@ -29,7 +29,8 @@ function start(port, hostname) {
     }
 
     const serverUrl = `${envConfig.protocol}//${envConfig.host}:${envConfig.port}/`;
-    opn(serverUrl);
+
+    opn(serverUrl, { app: 'google chrome' });
     
     console.log('');
     console.log('');
