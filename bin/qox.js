@@ -59,7 +59,7 @@ cli
 cli
   .command('publish')
   .description('build and publish project to cdn'.green)
-  .action(CMD_PUBLISH)
+  .action(CMD_PUBLISH);
 
 cli
   .command('lint <path>')
