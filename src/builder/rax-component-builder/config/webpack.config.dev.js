@@ -25,10 +25,10 @@ webpackConfigDev.entry = {
   'index.bundle': [pathConfig.appDemoJs]
 };
 
-Object.keys(webpackConfigDev.entry).forEach(point => {
-  // hot reaload client.
-  webpackConfigDev.entry[point].unshift(require.resolve('../hmr/webpackHotDevClient.entry'));
-});
+// Object.keys(webpackConfigDev.entry).forEach(point => {
+//   // hot reaload client.
+//   webpackConfigDev.entry[point].unshift(require.resolve('../hmr/webpackHotDevClient.entry'));
+// });
 
 // Only work on web
 webpackConfigDev.plugins.push(new webpack.NoEmitOnErrorsPlugin());

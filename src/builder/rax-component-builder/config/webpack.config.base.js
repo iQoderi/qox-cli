@@ -75,7 +75,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: require.resolve('babel-loader'),
             query: babelConfig
           }
         ],
@@ -84,7 +84,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'stylesheet-loader'
+            loader: require.resolve('stylesheet-loader')
           }
         ],
       },
@@ -92,7 +92,7 @@ module.exports = {
         test: /\.json$/,
         use: [
           {
-            loader: 'json-loader'
+            loader: require.resolve('json-loader')
           }
         ],
       },
@@ -100,7 +100,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'image-source-loader'
+            loader: require.resolve('image-source-loader')
           }
         ],
       }
