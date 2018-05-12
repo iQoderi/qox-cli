@@ -1,1 +1,1 @@
-console.log('publish');
+module.exports = function() {};

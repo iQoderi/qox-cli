@@ -1,1 +1,1 @@
-console.log('build');
+module.exports = function() {};
