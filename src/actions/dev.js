@@ -3,7 +3,6 @@ const colors = require('colors');
 const util = require('../lib/utils');
 const glob = require('glob');
 const { exec } = require('child_process');
-const opn = require('opn');
 
 const { preInstall, printCommandLog } = util;
 const { log, error } = util.msg;
@@ -17,6 +16,11 @@ module.exports = function() {
     const { type, yarn, builder } = require(qoxJson);
 
     printCommandLog();
+    exec('git branch', function(err, data) {
+      console.log(err);
+      console.log(data);
+    });
+
     preInstall(yarn);
 
     const useBuilder = require(`${builderPath}/${builder}/dev`);

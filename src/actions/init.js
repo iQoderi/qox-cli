@@ -53,12 +53,20 @@ const downloadProject = function(path,  projectName, type) {
         const REG_QOX = /^qox-/ig;
         const name = projectName.match(REG_QOX) ? projectName : `qox-${projectName}`;
 
+        // 修改 package.json 模块名
         pkg.name = name;
         fs.writeFile(`${path}/package.json`, JSON.stringify(pkg, null, 4), null, function(err) {
           if (err) {
             error(`修改 package name 失败，请手动修改，格式（qox-${name}）`);
           }
-        })
+        });
+
+        // 初始化 git 仓库
+        log('初始化 git 仓库');
+
+        // 
+        exec('git init');
+
         log('init complete');        
       }
     });

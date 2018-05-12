@@ -15,7 +15,6 @@ const weexBundleUrl = `${bundleUrl}?_wx_tpl=${bundleUrl}`;
 
 qrcode.generate(webUrl, { small: true });
 console.log('Web: scan above QRCode ' + webUrl + ' or direct open in browser.\n');
-
 qrcode.generate(weexBundleUrl, { small: true });
 console.log('Weex: scan above QRCode ' + weexBundleUrl + ' use weex playground.\n');
 

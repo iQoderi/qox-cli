@@ -1,5 +1,7 @@
 'use strict';
 /* eslint no-console: 0 */
+const opn = require('opn');
+
 process.env.NODE_ENV = 'development';
 
 process.on('unhandledRejection', err => {
@@ -27,6 +29,8 @@ function start(port, hostname) {
     }
 
     const serverUrl = `${envConfig.protocol}//${envConfig.host}:${envConfig.port}/`;
+    opn(serverUrl);
+    
     console.log('');
     console.log('');
     console.log(colors.green('Starting the development server at:'));
