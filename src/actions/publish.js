@@ -25,22 +25,21 @@ module.exports = function() {
     const qn = new QiniuSdk(qiniu.key);
     const { name, version } = pkg;
 
-    console.log(name, version);
+    const uploadConf = {
+      bucket: qiniu.uploadConf.bucket,
+      filePrefix: 'code/npm',
+      version,
+      key: `${name}.cmd.js`,
+      localFile: `${currentPath}/build/js/index.bundle.min.js`
+    };
 
-    // const uploadConf = {
-    //   bucket: 'neuqst',
-    //   filePrefix: 'code/npm',
-    //   version: '0.0.1',
-    //   key: 'roxBundle.js',
-    //   localFile: './index.js'
-    // };
-
-    // // 调用
-    // qn.putFile(uploadConf).then((resp) => {
-    //   console.log(resp);
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+    console.log(JSON.stringify(uploadConf));
+    // 调用
+    qn.putFile(uploadConf).then((resp) => {
+      console.log(resp);
+    }).catch((err) => {
+      console.log(err);
+    });
   } else {
     error(`Can not find ${'qox.json'.bold} in current directory`.red);    
   }
