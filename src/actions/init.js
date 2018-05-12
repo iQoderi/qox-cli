@@ -46,8 +46,6 @@ const downloadProject = function(path, type) {
       spinner.stop();
       process.stdout.write('\n');
 
-      console.log(err);
-      
       if (err){
         error('init error'.red)
       } else {
