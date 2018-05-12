@@ -11,7 +11,7 @@ const { prompt } = require('inquirer');
 const { log, warn, error } = util.msg;
 const REG_PATH = /^([a-zA-Z0-9_-]+)$/ig;
 
-const initProject = function(path, create, clear) {
+const initProject = function(path, projectName, create, clear) {
   prompt([
     {
       type: 'list',
@@ -28,12 +28,12 @@ const initProject = function(path, create, clear) {
     }
 
     return create
-      ? mkdirp(path, () => downloadProject(path, type))
-      : downloadProject(path, type);
+      ? mkdirp(path, () => downloadProject(path, projectName, type))
+      : downloadProject(path, projectName, type);
   });
 };
 
-const downloadProject = function(path, type) {
+const downloadProject = function(path,  projectName, type) {
   if (template[type]) {
     const spinner = new Spinner(
       `${'info'.green.bold} init create ${type.red} %s`
@@ -49,7 +49,17 @@ const downloadProject = function(path, type) {
       if (err){
         error('init error'.red)
       } else {
-        log('init complete');
+        const pkg = require(`${path}/package.json`);
+        const REG_QOX = /^qox-/ig;
+        const name = projectName.match(REG_QOX) ? projectName : `qox-${projectName}`;
+
+        pkg.name = name;
+        fs.writeFile(`${path}/package.json`, JSON.stringify(pkg, null, 4), null, function(err) {
+          if (err) {
+            error(`修改 package name 失败，请手动修改，格式（qox-${name}）`);
+          }
+        })
+        log('init complete');        
       }
     });
   } else {
@@ -84,11 +94,11 @@ module.exports = function(ProjectName) {
         },
       ]).then(({ overwritte }) => {
         if (overwritte) {
-          initProject(path, true, true);
+          initProject(path, projectName, true, true);
         }
       });
     } else {
-      initProject(path, true);
+      initProject(path, projectName, true);
     }
 
   } else {
@@ -107,11 +117,11 @@ module.exports = function(ProjectName) {
       ]).then(({ overwritte }) => {
         if (overwritte) {
           warn('Mandatory initialization operation!'.yellow);
-          initProject(path);
+          initProject(path, projectName);
         }
       });
     } else {
-      initProject(path);
+      initProject(path, projectName);
     }
   }
 };
