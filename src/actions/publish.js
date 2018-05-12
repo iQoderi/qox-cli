@@ -1,11 +1,13 @@
 const fs = require('fs');
 const QiniuSdk = require('qiniu-sdk');
 const colors = require('colors');
+const { Spinner } = require('cli-spinner');
 const { exec } = require('child_process');
 const util = require('../lib/utils');
+const build = require('./build');
 const rm = require('rimraf');
 
-const { error } = util.msg;
+const { log, error } = util.msg;
 
 module.exports = function() {
   const currentPath = process.cwd();
@@ -17,28 +19,30 @@ module.exports = function() {
 
     const { qiniu } = qoxJson;
 
-    rm(`${currentPath}/build`, function() {
-      // todo
-    });
-    exec('qox build');
+    build(function(ret) {
+      const qn = new QiniuSdk(qiniu.key);
+      const { name, version } = pkg;
 
-    const qn = new QiniuSdk(qiniu.key);
-    const { name, version } = pkg;
+      const uploadConf = {
+        bucket: qiniu.uploadConf.bucket,
+        filePrefix: 'code/npm',
+        version,
+        key: `${name}.cmd.js`,
+        localFile: `${currentPath}/build/js/index.bundle.min.js`
+      };
 
-    const uploadConf = {
-      bucket: qiniu.uploadConf.bucket,
-      filePrefix: 'code/npm',
-      version,
-      key: `${name}.cmd.js`,
-      localFile: `${currentPath}/build/js/index.bundle.min.js`
-    };
-
-    console.log(JSON.stringify(uploadConf));
-    // 调用
-    qn.putFile(uploadConf).then((resp) => {
-      console.log(resp);
-    }).catch((err) => {
-      console.log(err);
+      const pubSpinner = new Spinner(
+        `正在上传打包文件到 CDN %s`
+      );
+      pubSpinner.start();
+      // 调用
+      qn.putFile(uploadConf).then((resp) => {
+        log('上传打包文件到 CDN 成功'.green);
+        pubSpinner.stop();
+      }).catch((err) => {
+        error('上传打包文件到 CDN 失败，请稍后重试'.red);
+        pubSpinner.stop();      
+      });
     });
   } else {
     error(`Can not find ${'qox.json'.bold} in current directory`.red);    

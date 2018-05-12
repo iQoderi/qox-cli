@@ -3,7 +3,7 @@ const colors = require('colors');
 const template = require('../config/initTemplate');
 const util = require('../lib/utils');
 const mkdirp = require('mkdirp');
-const Spinner = require('cli-spinner').Spinner;
+const { Spinner } = require('cli-spinner');
 const download = require('download-git-repo');
 const { exec } = require('child_process');
 const { prompt } = require('inquirer');
@@ -40,7 +40,7 @@ const downloadProject = function(path,  projectName, type) {
     );
 
     spinner.start();
-    spinner.setSpinnerString(3);
+    // spinner.setSpinnerString(1);
 
     download(template[type], path, err => {
       spinner.stop();

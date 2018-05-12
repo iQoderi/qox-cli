@@ -13,21 +13,23 @@ const createWebpackCompiler = require('./utils/createWebpackCompiler');
 const pathConfig = require('./config/path.config');
 const webpackConfigProd = require('./config/webpack.config.prod');
 
-function build(config) {
-  const compiler = createWebpackCompiler(config);
+function build(notify) {
+  const compiler = createWebpackCompiler(webpackConfigProd);
 
   compiler.run(err => {
     if (err) {
       throw err;
     }
 
-    console.log(colors.green('\nBuild successfully.'));
+    typeof notify === 'function' && notify(true);
   });
 }
 
-rimraf(pathConfig.appBuild, err => {
-  if (err) {
-    throw err;
-  }
-  build(webpackConfigProd);
-});
+module.exports = function(notify) {
+  rimraf(pathConfig.appBuild, err => {
+    if (err) {
+      throw err;
+    }
+    build(notify);
+  });
+};
