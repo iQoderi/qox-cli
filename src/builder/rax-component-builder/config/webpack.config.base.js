@@ -53,11 +53,11 @@ module.exports = {
         console.log('webpack: bundle build is now finished.'.green);
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        babel: babelConfig
-      }
-    })
+    // new webpack.LoaderOptionsPlugin({
+    //   options: {
+    //     babel: babelConfig
+    //   }
+    // })
   ],
   module: {
     rules: [
@@ -75,7 +75,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            query: babelConfig
           }
         ],
       },

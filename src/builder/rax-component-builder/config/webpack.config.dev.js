@@ -22,7 +22,7 @@ console.log('Weex: scan above QRCode ' + weexBundleUrl + ' use weex playground.\
 // enable source map
 webpackConfigDev.devtool = 'inline-module-source-map';
 webpackConfigDev.entry = {
-  'index.bundle': [pathConfig.appIndexJs]
+  'index.bundle': [pathConfig.appDemoJs]
 };
 
 Object.keys(webpackConfigDev.entry).forEach(point => {

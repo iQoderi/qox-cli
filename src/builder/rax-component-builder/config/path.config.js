@@ -16,9 +16,10 @@ const nodePaths = (process.env.NODE_PATH || '')
 
 const paths = {
   appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  appPublic: resolveApp('demo'),
+  appHtml: resolveApp('demo/index.html'),
   appIndexJs: resolveApp('src/index.js'),
+  appDemoJs: resolveApp('demo/demo.init.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appNodeModules: resolveApp('node_modules'),

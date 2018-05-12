@@ -9,6 +9,7 @@ process.on('unhandledRejection', err => {
 const colors = require('chalk');
 const WebpackDevServer = require('webpack-dev-server');
 
+const createWebpackCompiler = require('./utils/createWebpackCompiler');
 const webpackConfigDev = require('./config/webpack.config.dev');
 const webpackDevServerConfig = require('./config/webpackDevServer.config');
 const envConfig = require('./config/env.config');
