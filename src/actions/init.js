@@ -7,6 +7,7 @@ const { Spinner } = require('cli-spinner');
 const download = require('download-git-repo');
 const { exec } = require('child_process');
 const { prompt } = require('inquirer');
+const rimraf = require('rimraf');
 
 const { log, warn, error } = util.msg;
 const REG_PATH = /^([a-zA-Z0-9_-]+)$/ig;
@@ -24,7 +25,7 @@ const initProject = function(path, projectName, create, clear) {
 
     if (clear) {
       log(`running path clear process`);
-      exec(`rm -rf ${path}`);
+      rimraf(path);
     }
 
     return create
