@@ -3883,11 +3883,11 @@ mime-types@~2.1.17, mime-types@~2.1.18:
   dependencies:
     mime-db "~1.33.0"
 
-mime@1.3.6, mime@^1.3.4:
+mime@1.3.6:
   version "1.3.6"
   resolved "http://registry.npm.taobao.org/mime/download/mime-1.3.6.tgz#591d84d3653a6b0b4a3b9df8de5aa8108e72e5e0"
 
-mime@1.4.1:
+mime@1.4.1, mime@^1.3.4:
   version "1.4.1"
   resolved "http://registry.npm.taobao.org/mime/download/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
 
@@ -4610,9 +4610,9 @@ punycode@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/punycode/download/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
 
-qiniu-sdk@^0.0.2:
-  version "0.0.2"
-  resolved "http://registry.npm.taobao.org/qiniu-sdk/download/qiniu-sdk-0.0.2.tgz#214941732f3b20e95f9e5a5914e7fd772b2ebbac"
+qiniu-sdk@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/qiniu-sdk/-/qiniu-sdk-0.0.3.tgz#e3597bde8cd888dc18028fdded464073187cb7ed"
   dependencies:
     qiniu "^7.1.3"
 

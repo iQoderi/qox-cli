@@ -36,7 +36,7 @@
     "opn": "^5.3.0",
     "path": "^0.12.7",
     "path-exists": "^3.0.0",
-    "qiniu-sdk": "^0.0.2",
+    "qiniu-sdk": "0.0.3",
     "rax-hot-loader": "^0.6.3",
     "rax-scripts": "^0.6.3-1",
     "rimraf": "^2.6.2",

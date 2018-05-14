@@ -26,8 +26,8 @@ module.exports = function() {
       const uploadConf = {
         bucket: qiniu.uploadConf.bucket,
         filePrefix: 'code/npm',
-        version,
-        key: `${name}.cmd.js`,
+        // version,
+        key: `${name}/${version}/index.cmd.js`,
         localFile: `${currentPath}/build/js/index.bundle.min.js`
       };
 
@@ -37,6 +37,8 @@ module.exports = function() {
       pubSpinner.start();
       // 调用
       qn.putFile(uploadConf).then((resp) => {
+        console.log(resp);
+        log('\n');
         log('上传打包文件到 CDN 成功'.green);
         pubSpinner.stop();
       }).catch((err) => {
