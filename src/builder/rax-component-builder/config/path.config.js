@@ -18,7 +18,7 @@ const paths = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('demo'),
   appHtml: resolveApp('demo/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  appIndexJs: resolveApp('index.js'),
   appDemoJs: resolveApp('demo/demo.init.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
