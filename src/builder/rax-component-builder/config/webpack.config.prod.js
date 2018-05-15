@@ -11,7 +11,7 @@ const pkg = require(`${currentDir}/package.json`);
 const entryName = pkg.name;
 
 webpackConfigProd.entry = {
-  entryName: [pathConfig.appIndexJs]
+  [entryName]: [pathConfig.appIndexJs]
 };
 
 webpackConfigProd.output.pathinfo = false;
