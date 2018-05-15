@@ -6,9 +6,12 @@ const webpackConfigBase = require('./webpack.config.base');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const webpackConfigProd = Object.assign({}, webpackConfigBase);
+const currentDir = process.cwd();
+const pkg = require(`${currentDir}/package.json`);
+const entryName = pkg.name;
 
 webpackConfigProd.entry = {
-  'index.bundle.min': [pathConfig.appIndexJs]
+  entryName: [pathConfig.appIndexJs]
 };
 
 webpackConfigProd.output.pathinfo = false;
