@@ -37,8 +37,7 @@ module.exports = function() {
       pubSpinner.start();
       // 调用
       qn.putFile(uploadConf).then((resp) => {
-        console.log(resp);
-        log('\n');
+        console.log('');
         log('上传打包文件到 CDN 成功'.green);
         pubSpinner.stop();
       }).catch((err) => {
