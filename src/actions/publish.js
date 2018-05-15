@@ -15,7 +15,8 @@ module.exports = function() {
 
   if (fs.existsSync(qoxJsonPath)) {
     const qoxJson = require(qoxJsonPath);
-    const pkg = require(`${currentPath}/package.json`);    
+    const pkg = require(`${currentPath}/package.json`);
+    const componentName = pkg.name;  
 
     const { qiniu } = qoxJson;
 
@@ -28,7 +29,7 @@ module.exports = function() {
         filePrefix: 'code/npm',
         // version,
         key: `${name}/${version}/index.cmd.js`,
-        localFile: `${currentPath}/build/js/index.bundle.min.js`
+        localFile: `${currentPath}/build/js/${componentName}.js`
       };
 
       const pubSpinner = new Spinner(
