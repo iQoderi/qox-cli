@@ -14,6 +14,9 @@ webpackConfigProd.entry = {
   [entryName]: [pathConfig.appIndexJs]
 };
 
+// rax 外部引入
+// webpackConfigProd.externals = ['rax'];
+
 webpackConfigProd.output.pathinfo = false;
 webpackConfigProd.target = 'node';
 

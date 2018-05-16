@@ -7,6 +7,7 @@ const webpackConfigDev = Object.assign({}, webpackConfigBase);
 
 // enable source map
 webpackConfigDev.devtool = 'inline-module-source-map';
+
 webpackConfigDev.entry = {
   'index.bundle': [pathConfig.appDemoJs]
 };

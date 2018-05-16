@@ -11,6 +11,8 @@ const babelConfig = require('./babel.config');
 const publicPath = '/';
 const publicUrl = '';
 
+const shouldExternalBuiltInModules = process.env.NODE_ENV === 'production';
+
 module.exports = {
   mode: process.env.NODE_ENV,
   context: process.cwd(),
@@ -21,15 +23,19 @@ module.exports = {
     path: pathConfig.appBuild,
     pathinfo: true,
     filename: 'js/[name].js',
-    publicPath: publicPath
+    publicPath: publicPath,
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx']
   },
   plugins: [
     new RaxWebpackPlugin({
-      target: 'bundle',
-      externalBuiltinModules: false
+      target: 'cmd',
+      builtinModules: {
+        rax: ['rax'],
+        'rax-components': ['rax-components']
+      },
+      externalBuiltinModules: shouldExternalBuiltInModules
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -72,7 +78,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
         use: [
           {
             loader: require.resolve('babel-loader'),
