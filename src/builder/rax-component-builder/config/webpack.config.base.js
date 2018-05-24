@@ -4,6 +4,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const colors = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const RaxWebpackPlugin = require('rax-webpack-plugin');
+const DepsWebpackPlugin = require('webpack-depsjson-plugin');
 const webpack = require('webpack');
 const pathConfig = require('./path.config');
 const babelConfig = require('./babel.config');
@@ -59,11 +60,8 @@ module.exports = {
         console.log('webpack: bundle build is now finished.'.green);
       }
     }),
-    // new webpack.LoaderOptionsPlugin({
-    //   options: {
-    //     babel: babelConfig
-    //   }
-    // })
+    // 生成deps.json
+    new DepsWebpackPlugin(),
   ],
   module: {
     rules: [
